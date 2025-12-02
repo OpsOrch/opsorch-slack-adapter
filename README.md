@@ -50,6 +50,32 @@ make plugin         # Build ./bin/messagingplugin
 make integ-message  # Run integration tests (requires SLACK_TOKEN and SLACK_CHANNEL env vars)
 ```
 
+## CI/CD
+
+The repository includes GitHub Actions workflows:
+
+- **CI** (`ci.yml`): Runs tests and linting on every push/PR to main
+- **Release** (`release.yml`): Manual workflow that:
+  - Runs tests and linting
+  - Creates version tags (patch/minor/major)
+  - Builds multi-arch binaries (linux-amd64, linux-arm64, darwin-amd64, darwin-arm64)
+  - Publishes binaries as GitHub release assets
+
+### Pre-Built Binaries
+
+Download pre-built plugin binaries from [GitHub Releases](https://github.com/opsorch/opsorch-slack-adapter/releases):
+
+```dockerfile
+# Use in custom Docker images
+FROM ghcr.io/opsorch/opsorch-core:latest
+WORKDIR /opt/opsorch
+
+ADD https://github.com/opsorch/opsorch-slack-adapter/releases/download/v0.1.0/messagingplugin-linux-amd64 ./plugins/messagingplugin
+RUN chmod +x ./plugins/messagingplugin
+
+ENV OPSORCH_MESSAGING_PLUGIN=/opt/opsorch/plugins/messagingplugin
+```
+
 ## Integration Tests
 
 To run the integration tests, you need to provide your token and a channel ID that your app is invited:
