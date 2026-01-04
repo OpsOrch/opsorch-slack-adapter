@@ -87,10 +87,17 @@ func (p *SlackProvider) Send(ctx context.Context, msg schema.Message) (schema.Me
 		return schema.MessageResult{}, err
 	}
 
+	// Get permalink for the message
+	permalink, _ := p.client.GetPermalinkContext(ctx, &slack.PermalinkParameters{
+		Channel: channelID,
+		Ts:      timestamp,
+	})
+
 	return schema.MessageResult{
 		ID:      timestamp,
 		Channel: channelID,
 		SentAt:  time.Now(),
+		URL:     permalink,
 	}, nil
 }
 

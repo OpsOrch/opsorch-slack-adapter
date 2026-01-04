@@ -3,7 +3,7 @@ module github.com/opsorch/opsorch-slack-adapter
 go 1.22
 
 require (
-	github.com/opsorch/opsorch-core v0.0.4
+	github.com/opsorch/opsorch-core v0.4.0
 	github.com/slack-go/slack v0.12.5
 )
 
