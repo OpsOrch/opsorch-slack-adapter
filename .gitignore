@@ -16,6 +16,7 @@
 coverage.*
 *.coverprofile
 profile.cov
+.env.local
 
 # Build output
 bin/

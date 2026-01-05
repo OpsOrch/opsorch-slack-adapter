@@ -45,6 +45,9 @@ func main() {
 		log.Printf("❌ Failed to send simple message: %v", err)
 	} else {
 		fmt.Printf("✅ Sent simple message. ID: %s, Timestamp: %s\n", res.ID, res.SentAt)
+		if res.URL != "" {
+			fmt.Printf("   URL: %s\n", res.URL)
+		}
 	}
 
 	// Test 2: Send a rich message with blocks
@@ -67,5 +70,8 @@ func main() {
 		log.Printf("❌ Failed to send rich message: %v", err)
 	} else {
 		fmt.Printf("✅ Sent rich message. ID: %s, Timestamp: %s\n", res.ID, res.SentAt)
+		if res.URL != "" {
+			fmt.Printf("   URL: %s\n", res.URL)
+		}
 	}
 }
